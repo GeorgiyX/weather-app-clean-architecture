@@ -1,0 +1,21 @@
+#ifndef WEATHER_NETWORK_IMPL
+#define WEATHER_NETWORK_IMPL
+
+template <class RequestT, class ResponceT>
+WeatherNetworkLayer<RequestT, ResponceT>::WeatherNetworkLayer(const std::string apiKey)
+{
+
+}
+
+void WeatherNetworkLayer<RequestT, ResponceT>::setNetwork(std::shared_ptr<INetwork> &network)
+{
+    _network = network;
+}
+
+template<class RequestT, class ResponceT>
+void WeatherNetworkLayer<RequestT, ResponceT>::setWeatherUseCase(std::shared_ptr<WeatherUseCase> &usecase)
+{
+    _usecase = usecase;
+}
+
+#endif WEATHER_NETWORK_IMPL
