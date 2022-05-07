@@ -8,11 +8,11 @@
 #include <string>
 
 struct IWeatherUILayer {
-    void showForecast(const WeatherForecast &forecast);
-    void showError(const std::string &message);
-    void clearError();
-    void showProgressBar();
-    void hideProgressBar();
+    virtual void showForecast(const WeatherForecast &forecast) = 0;
+    virtual void showError(const std::string &message) = 0;
+    virtual void clearError() = 0;
+    virtual void showProgressBar() = 0;
+    virtual void hideProgressBar() = 0;
 };
 
 #endif // UILAYERS_H

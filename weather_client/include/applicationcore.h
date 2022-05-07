@@ -7,6 +7,7 @@
 
 // weather_client
 #include "dependencies/network.h"
+#include "ui/weather_ui_container.h"
 
 // qt
 #include <QObject>
@@ -22,13 +23,16 @@ public:
     ApplicationCore();
 
 private:
+
+    std::shared_ptr<WeatherUIContainer> _uiContainer;
+
     struct {
         std::shared_ptr<WeatherUseCase> _weather;
-    } usecases;
+    } _usecases;
 
     struct {
         std::shared_ptr<WeatherNetworkLayer<RequestRealisation, ResponceRealisation>> _weather;
-    } networks;
+    } _networks;
 
 };
 

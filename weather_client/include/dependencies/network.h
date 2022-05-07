@@ -1,5 +1,5 @@
-#ifndef APPLICATIONCORE_H
-#define APPLICATIONCORE_H
+#ifndef NETWORK_H
+#define NETWORK_H
 
 // weather_core
 #include <weather_core/dependencies/inetwork.h>
@@ -18,4 +18,4 @@ class ResponceRealisation : public IResponce {
 
 
 
-#endif  // APPLICATIONCORE_H
+#endif  // NETWORK_H

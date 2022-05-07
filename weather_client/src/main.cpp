@@ -1,9 +1,12 @@
 #include <iostream>
+#include <QGuiApplication>
 
-using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
-    cout << "Hello World!" << endl;
+    
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
+    
     return 0;
 }
