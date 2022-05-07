@@ -43,15 +43,25 @@ ResponceRealisation::ResponceRealisation(QNetworkReply *reply) :
     parseBody();
 }
 
-std::vector<std::pair<std::string, std::string>> &ResponceRealisation::headers()
+int ResponceRealisation::status()
 {
-    return _headers;
+    return _reply->attribute(QNetworkRequest::Attribute::HttpStatusCodeAttribute).toInt();
+}
+
+bool ResponceRealisation::isError()
+{
+    return _reply->error() != QNetworkReply::NetworkError::NoError;
 }
 
 
 std::vector<char> &ResponceRealisation::body()
 {
     return _body;
+}
+
+std::vector<IResponce::HeaderString> &ResponceRealisation::headers()
+{
+    return _headers;
 }
 
 void ResponceRealisation::parseHeaders()

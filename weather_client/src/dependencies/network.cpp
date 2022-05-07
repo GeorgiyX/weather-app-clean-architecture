@@ -17,6 +17,7 @@ void NetworkRealisation::get(const IRequest &request,
     connect(responce, &QNetworkReply::finished, [responce, responceCallBack]() {
         ResponceRealisation responceRealisation(responce);
         responceCallBack(responceRealisation);
+        responce->deleteLater();
     });
 }
 
@@ -30,5 +31,6 @@ void NetworkRealisation::post(const IRequest &request,
     connect(responce, &QNetworkReply::finished, [responce, responceCallBack]() {
         ResponceRealisation responceRealisation(responce);
         responceCallBack(responceRealisation);
+        responce->deleteLater();
     });
 }
