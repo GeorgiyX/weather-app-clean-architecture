@@ -31,5 +31,4 @@ void NetworkRealisation::post(const IRequest &request,
         ResponceRealisation responceRealisation(responce);
         responceCallBack(responceRealisation);
     });
-
 }

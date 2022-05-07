@@ -15,7 +15,7 @@
 class RequestRealisation : public IRequest {
 public:
     RequestRealisation();
-    ~RequestRealisation();
+    ~RequestRealisation() = default;
 
     void setURL(const std::string &url) override;
     void setBody(std::vector<char> &&data) override;
@@ -31,15 +31,21 @@ private:
 
 class ResponceRealisation : public IResponce {
 public:
+
     ResponceRealisation(QNetworkReply *reply);
-    ~ResponceRealisation();
+    ~ResponceRealisation() = default;
 
     int status() override;
     bool isError() override;
-    std::vector<char> &&body() override;
-    std::vector<std::pair<std::string, std::string>> headers() override;
+    std::vector<char> &body() override;
+    std::vector<HeaderString> &headers() override;
 
 private:
+    void parseHeaders();
+    void parseBody();
+
     QNetworkReply *_reply;
+    std::vector<HeaderString> _headers;
+    std::vector<char> _body;
 };
 #endif // REQUEST_RESPONCE_H

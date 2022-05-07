@@ -6,17 +6,18 @@
 #include <functional>
 
 
-class IRequest {
+struct IRequest {
     virtual void setURL(const std::string &url) = 0;
     virtual void setBody(std::vector<char> &&data) = 0;
     virtual void setHeader(const std::string &header, const std::string &value) = 0;
 };
 
-class IResponce {
+struct IResponce {
+    using HeaderString = std::pair<std::string, std::string>;
     virtual int status() = 0;
     virtual bool isError() = 0;
-    virtual std::vector<char> &&body() = 0;
-    virtual std::vector<std::pair<std::string, std::string>> headers() = 0;
+    virtual std::vector<char> &body() = 0;
+    virtual std::vector<HeaderString> &headers() = 0;
 };
 
 

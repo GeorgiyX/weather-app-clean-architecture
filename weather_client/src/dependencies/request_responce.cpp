@@ -1,10 +1,10 @@
+// weather_core
 #include "dependencies/request_responce.h"
 
-RequestRealisation::~RequestRealisation()
-{
+// stl
+#include <cstring>
 
-}
-
+/* RequestRealisation */
 RequestRealisation::RequestRealisation() :
     _request(std::make_shared<QNetworkRequest>()),
     _body()
@@ -32,7 +32,45 @@ QNetworkRequest &RequestRealisation::getQNetworkRequest() const
 }
 
 
-std::vector<std::pair<std::string, std::string> > ResponceRealisation::headers()
+/* ResponceRealisation */
+ResponceRealisation::ResponceRealisation(QNetworkReply *reply) :
+    IResponce(),
+    _reply(reply),
+    _headers(),
+    _body()
 {
-    _re
+    parseHeaders();
+    parseBody();
+}
+
+std::vector<std::pair<std::string, std::string>> &ResponceRealisation::headers()
+{
+    return _headers;
+}
+
+
+std::vector<char> &ResponceRealisation::body()
+{
+    return _body;
+}
+
+void ResponceRealisation::parseHeaders()
+{
+    auto &headersRaw = _reply->rawHeaderPairs();
+    _headers.reserve(headersRaw.length());
+    std::for_each(headersRaw.begin(), headersRaw.end(),
+                  [this](const QNetworkReply::RawHeaderPair &rawHeader) {
+        HeaderString stringHeader;
+        stringHeader.first = rawHeader.first.data();
+        stringHeader.second = rawHeader.second.data();
+        _headers.push_back(std::move(stringHeader));
+    });
+}
+
+void ResponceRealisation::parseBody()
+{
+    std::vector<char> body;
+    auto bodyByteArray = _reply->readAll();
+    body.reserve(bodyByteArray.size());
+    std::memcpy(body.data(), bodyByteArray.data(), body.capacity());
 }
