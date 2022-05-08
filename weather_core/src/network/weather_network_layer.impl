@@ -42,7 +42,12 @@ void WeatherNetworkLayer<RequestT, ResponceT, JSON>::makeWeatherRequest(const We
 template <class RequestT, class ResponceT, class JSON>
 void WeatherNetworkLayer<RequestT, ResponceT, JSON>::onWeatherResponce(IResponce &responce)
 {
-    JSON json(std::move(responce.body()));
+    if (responce.isError()) {
+        _usecase->onForecastError();
+        return;
+    }
+
+    JSON json(responce.body());
     WeatherForecast forecast;
 
     forecast.temperature = json.template get<double>("main.temp", 0.0);

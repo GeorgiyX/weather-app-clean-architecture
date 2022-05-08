@@ -21,6 +21,3 @@ unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
-
-DISTFILES += \
-    network/weather_network_layer.impl

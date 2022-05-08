@@ -1,0 +1,43 @@
+// weather_client
+#include "dependencies/json.h"
+
+// stl
+#include <iostream>
+#include <ostream>
+
+// boost
+#include <boost/property_tree/json_parser.hpp>
+
+JSONer::JSONer(const std::vector<char> &data) : IJSONer(data)
+{
+    std::stringbuf buf(std::string(data.data()));
+    std::istream stream(&buf);
+    pt::ptree tree;
+    pt::read_json(stream, _tree);
+}
+
+template<class T>
+T JSONer::get(const std::string &path, T defaultValue)
+{
+    return _tree.get<T>(path, defaultValue);
+}
+
+template<class T>
+void JSONer::put(const std::string &path, T value)
+{
+    _tree.put<T>(path, value);
+}
+
+std::vector<char> JSONer::toBuffer()
+{
+    std::stringbuf bufString;
+    std::ostream stream(&bufString);
+    pt::write_json(stream, _tree);
+
+    std::vector<char> bufVec;
+    bufVec.reserve(bufString.str().size());
+    std::memcpy(bufVec.data(), bufString.str().c_str(), bufVec.capacity());
+
+    return bufVec;
+}
+

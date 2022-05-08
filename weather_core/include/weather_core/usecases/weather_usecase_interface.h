@@ -10,6 +10,7 @@ struct IWeatherUseCaseUi {
 
 struct IWeatherUseCaseNetwork {
     virtual void onForecastResponce(const WeatherForecast &forecast) = 0;
+    virtual void onForecastError() = 0;
 };
 
 

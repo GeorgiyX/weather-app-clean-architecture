@@ -5,10 +5,8 @@
 #include <vector>
 #include <string>
 
-struct IJSONParser {
-    IJSONParser(std::vector<char> &) {};
-
-    IJSONParser(std::vector<char> &&) {};
+struct IJSONer {
+    IJSONer(const std::vector<char> &) {};
 
     template<class T>
     T get(const std::string &path, T);
@@ -16,7 +14,7 @@ struct IJSONParser {
     template<class T>
     void put(const std::string &path, T);
 
-    virtual std::vector<char> &toBuffer() = 0;
+    virtual std::vector<char> toBuffer() = 0;
 };
 
 #endif // JSON_H

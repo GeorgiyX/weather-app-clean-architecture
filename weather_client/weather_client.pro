@@ -14,6 +14,7 @@ SOURCES += \
         src/ui/weather_ui_container.cpp
 
 HEADERS += \
+    include/dependencies/json.h \
     include/dependencies/request_responce.h \
     include/dependencies/network.h \
     include/applicationcore.h \
@@ -21,7 +22,9 @@ HEADERS += \
     include/ui/weather_ui_container.h
 
 INCLUDEPATH += \
-    include
+    include \
+    src
+
 
 QT += widgets
 

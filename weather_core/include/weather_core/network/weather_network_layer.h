@@ -18,7 +18,7 @@ class WeatherNetworkLayer : public IWeatherNetworkLayer
 {
     static_assert(std::is_base_of<IRequest, RequestT>::value, "RequestT должен реализовывать IRequest");
     static_assert(std::is_base_of<IResponce, ResponceT>::value, "ResponceT должен реализовывать IResponce");
-    static_assert(std::is_base_of<IJSONParser, JSON>::value, "JSON должен реализовывать IJSONParser");
+    static_assert(std::is_base_of<IJSONer, JSON>::value, "JSON должен реализовывать IJSONer");
 
 public:
     WeatherNetworkLayer(const std::string apiKey);
