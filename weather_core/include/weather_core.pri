@@ -1,5 +1,6 @@
 HEADERS += \
     $$PWD/weather_core/core.h \
+    $$PWD/weather_core/dependencies/json.h \
     $$PWD/weather_core/macro.h \
     $$PWD/weather_core/data/weather.h \
     $$PWD/weather_core/dependencies/inetwork.h \
@@ -11,7 +12,8 @@ HEADERS += \
     $$PWD/weather_core/ui/ui_layers.h
 
 INCLUDEPATH += \
-  $$PWD
+  $$PWD \
+  $$PWD/../src
 
 DEPENDPATH += \
   $$PWD

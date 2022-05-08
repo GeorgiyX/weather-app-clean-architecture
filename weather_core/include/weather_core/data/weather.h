@@ -13,7 +13,11 @@ struct WeatherLocation {
 
 struct WeatherForecast {
     double temperature;
-    std::string sky;
+    double pressure;
+    double cloudiness;
+    double windSpeed;
+    double windDegree;
+    double visibility;
 };
 
 #endif // MYDATATYPES_H

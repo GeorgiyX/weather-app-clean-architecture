@@ -1,0 +1,57 @@
+#ifndef WEATHER_NETWORK_IMPL
+#define WEATHER_NETWORK_IMPL
+
+#include <weather_core/network/weather_network_layer.h>
+
+template <class RequestT, class ResponceT, class JSON>
+WeatherNetworkLayer<RequestT, ResponceT, JSON>::WeatherNetworkLayer(const std::string apiKey) :
+    _network(),
+    _usecase(),
+    _apiKey(apiKey)
+{
+
+}
+
+template <class RequestT, class ResponceT, class JSON>
+void WeatherNetworkLayer<RequestT, ResponceT, JSON>::setNetwork(std::shared_ptr<INetwork> &network)
+{
+    _network = network;
+}
+
+template <class RequestT, class ResponceT, class JSON>
+void WeatherNetworkLayer<RequestT, ResponceT, JSON>::setWeatherUseCase(std::shared_ptr<IWeatherUseCaseNetwork> &usecase)
+{
+    _usecase = usecase;
+}
+
+template <class RequestT, class ResponceT, class JSON>
+void WeatherNetworkLayer<RequestT, ResponceT, JSON>::makeWeatherRequest(const WeatherLocation &weather)
+{
+    RequestT request;
+    request.setURL(WEATHER_URL
+                   + "?lat=" + std::to_string(weather.lat)
+                   + "&lon=" + std::to_string(weather.lon)
+                   + "&appid=" + _apiKey);
+    _network->get(request,
+                  std::bind(&WeatherNetworkLayer<RequestT, ResponceT, JSON>::onWeatherResponce,
+                            this,
+                            std::placeholders::_1));
+
+}
+
+template <class RequestT, class ResponceT, class JSON>
+void WeatherNetworkLayer<RequestT, ResponceT, JSON>::onWeatherResponce(IResponce &responce)
+{
+    JSON json(std::move(responce.body()));
+    WeatherForecast forecast;
+
+    forecast.temperature = json.template get<double>("main.temp", 0.0);
+    forecast.pressure = json.template get<double>("main.pressure", 0.0);
+    forecast.cloudiness = json.template get<double>("clouds.all", 0.0);
+    forecast.windSpeed = json.template get<double>("wind.speed", 0.0);
+    forecast.windSpeed = json.template get<double>("wind.deg", 0.0);
+
+    _usecase->onForecastResponce(forecast);
+}
+
+#endif WEATHER_NETWORK_IMPL

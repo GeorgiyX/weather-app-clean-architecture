@@ -53,7 +53,6 @@ bool ResponceRealisation::isError()
     return _reply->error() != QNetworkReply::NetworkError::NoError;
 }
 
-
 std::vector<char> &ResponceRealisation::body()
 {
     return _body;
