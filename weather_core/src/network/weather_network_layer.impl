@@ -19,7 +19,7 @@ void WeatherNetworkLayer<RequestT, ResponceT, JSON>::setNetwork(std::shared_ptr<
 }
 
 template <class RequestT, class ResponceT, class JSON>
-void WeatherNetworkLayer<RequestT, ResponceT, JSON>::setWeatherUseCase(std::shared_ptr<IWeatherUseCaseNetwork> &usecase)
+void WeatherNetworkLayer<RequestT, ResponceT, JSON>::setWeatherUseCase(std::shared_ptr<IWeatherUseCaseNetwork> usecase)
 {
     _usecase = usecase;
 }

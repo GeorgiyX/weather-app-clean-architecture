@@ -4,6 +4,9 @@
 // weather_client
 #include "ui/weather_ui.h"
 
+// weather_core
+#include <weather_core/usecases/weather_usecase_interface.h>
+
 // qt
 #include <QQmlApplicationEngine>
 #include <QObject>
@@ -22,6 +25,8 @@ public:
      * QObject
      */
     IWeatherUILayer *getIWeatherUILayer();
+
+    void setWeatherUseCase(std::shared_ptr<IWeatherUseCaseUi> usecase);
 
 private:
     QQmlApplicationEngine *_engine;

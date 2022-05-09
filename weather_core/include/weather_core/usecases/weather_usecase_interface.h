@@ -5,7 +5,8 @@
 #include <weather_core/data/weather.h>
 
 struct IWeatherUseCaseUi {
-    virtual void onGetForecastClick(double lon, double lat) = 0;
+    virtual void onGetForecastClick(const std::string &lon, const std::string & lat) = 0;
+    virtual void onResetClick() = 0;
 };
 
 struct IWeatherUseCaseNetwork {

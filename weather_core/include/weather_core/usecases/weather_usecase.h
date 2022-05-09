@@ -14,14 +14,14 @@ class WeatherUseCase : public IWeatherUseCaseUi, public IWeatherUseCaseNetwork
 {
 public:
     WeatherUseCase();
-    void setNetwork(std::shared_ptr<IWeatherNetworkLayer> &network);
-    void setUI(std::shared_ptr<IWeatherUILayer> &ui);
-    void onForecastResponce(const WeatherForecast &forecast);
-    void onGetForecastClick(double lon, double lat);
+    void setNetwork(std::shared_ptr<IWeatherNetworkLayer> network);
+    void setUI(IWeatherUILayer *ui);
+    void onForecastResponce(const WeatherForecast &forecast) override;
+    void onGetForecastClick(const std::string &lon, const std::string & lat) override;
 
 private:
     std::shared_ptr<IWeatherNetworkLayer> _network;
-    std::shared_ptr<IWeatherUILayer> _ui;
+    IWeatherUILayer *_ui;  // За создание-уничтожение UI отвечает пользователь либы (Qt)
 
 };
 

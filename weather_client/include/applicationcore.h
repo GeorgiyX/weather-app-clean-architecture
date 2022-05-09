@@ -7,6 +7,8 @@
 
 // weather_client
 #include "dependencies/network.h"
+#include "dependencies/request_responce.h"
+#include "dependencies/json.h"
 #include "ui/weather_ui_container.h"
 
 // qt
@@ -16,22 +18,23 @@
 // stl
 #include <memory>
 
+using WeatherNetworkLayerSpec = WeatherNetworkLayer<RequestRealisation, ResponceRealisation, JSONer>;
 
 class ApplicationCore
 {
 public:
     ApplicationCore();
 
+    void init(const std::string &apiKey);
+
 private:
 
     std::shared_ptr<WeatherUIContainer> _uiContainer;
-
     struct {
-        std::shared_ptr<WeatherUseCase> _weather;
+        std::shared_ptr<WeatherUseCase> weather;
     } _usecases;
-
     struct {
-        std::shared_ptr<WeatherNetworkLayer<RequestRealisation, ResponceRealisation>> _weather;
+        std::shared_ptr<WeatherNetworkLayerSpec> weather;
     } _networks;
 
 };

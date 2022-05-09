@@ -11,7 +11,8 @@ SOURCES += \
         src/applicationcore.cpp \
         src/main.cpp \
         src/ui/weather_ui.cpp \
-        src/ui/weather_ui_container.cpp
+        src/ui/weather_ui_container.cpp \
+        src/utils/utils.cpp
 
 HEADERS += \
     include/dependencies/json.h \
@@ -19,7 +20,8 @@ HEADERS += \
     include/dependencies/network.h \
     include/applicationcore.h \
     include/ui/weather_ui.h \
-    include/ui/weather_ui_container.h
+    include/ui/weather_ui_container.h \
+    include/utils/utils.h
 
 INCLUDEPATH += \
     include \
@@ -31,4 +33,5 @@ QT += widgets
 FORMS +=
 
 DISTFILES += \
-    res/ui/main_ui.qml
+    res/ui/main_ui.qml \
+    src/dependencies/json.impl

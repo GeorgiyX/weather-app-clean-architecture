@@ -20,3 +20,8 @@ IWeatherUILayer *WeatherUIContainer::getIWeatherUILayer()
 {
     return _weatherUi;
 }
+
+void WeatherUIContainer::setWeatherUseCase(std::shared_ptr<IWeatherUseCaseUi> usecase)
+{
+
+}

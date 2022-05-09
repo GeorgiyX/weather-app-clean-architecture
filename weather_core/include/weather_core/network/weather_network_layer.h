@@ -21,9 +21,10 @@ class WeatherNetworkLayer : public IWeatherNetworkLayer
     static_assert(std::is_base_of<IJSONer, JSON>::value, "JSON должен реализовывать IJSONer");
 
 public:
+    WeatherNetworkLayer() = delete;
     WeatherNetworkLayer(const std::string apiKey);
     void setNetwork(std::shared_ptr<INetwork> &network);
-    void setWeatherUseCase(std::shared_ptr<IWeatherUseCaseNetwork> &usecase);
+    void setWeatherUseCase(std::shared_ptr<IWeatherUseCaseNetwork> usecase);
     void makeWeatherRequest(const WeatherLocation &weather) override;
 
 
